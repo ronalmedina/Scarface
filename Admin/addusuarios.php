@@ -1,0 +1,232 @@
+<?php
+require_once("../../Models/conexion.php");
+require_once("../../Models/consultas_global.php");
+require_once("../../Models/consultasAdmin.php");
+require_once("../../Controller/Admin/Arrgl_mostrarprofile.php");
+require_once("../../Controller/seguridad.php");
+?>
+
+<!DOCTYPE html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  daassets-path="assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <link rel="stylesheet" href="assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <?php
+          include "sidebar.php";
+        ?>
+        <!-- / Menu -->
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+        <?php
+          include "navbarAd.php";
+        ?>
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container">
+              <br>
+              <br> 
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">Registrar un nuevo Usuario</h5>
+                      <small class="text-muted float-end">Ingrese toda la información necesaria para registrar un nuevo usuario</small>
+                    </div>
+                    <div class="card-body">
+                      <form action="../../controller/Admin/registrarUsuario.php" method="POST" enctype="multipart/form-data">
+
+
+                        <br><div class="row">
+                        <div class="col-md-6">
+                          <label class="form-label" for="basic-default-fullname">Nombre</label>
+                          <input name="usu_nombre" type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe" />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label" for="basic-default-fullname">Apellido</label>
+                          <input name="usu_apellido" type="text" class="form-control" id="basic-default-fullname" placeholder="Perez Mollogón" />
+                        </div>
+                        </div>
+
+
+                        <br><div class="row">
+
+                        <div class="col-md-6">
+                        <label class="form-label" for="basic-default-phone">Tipo de documento</label>
+                        <select name="usu_tipo_documento" id="defaultSelect" class="form-select">
+                          <option>Seleccione...</option>
+                          <option value="cedula">Cedula de ciudadania </option>
+                          <option value="tarjeta">Tarjeta de identidad</option>
+                          <option value="cedulae">Cedula de extranjería</option>
+                        </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label" for="basic-default-phone">Número de documento</label>
+                          <input name="usu_documento" type="numer" id="basic-default-phone" class="form-control phone-mask" placeholder="658 799 8941"/>
+                        </div>
+                        </div>
+
+                        <br><div class="row">
+
+                        <div class="col-md-6">
+                        <label class="form-label" for="basic-default-phone">Estado</label>
+                        <select name="estado" id="defaultSelect" class="form-select">
+                          <option>Selccione...</option>
+                          <option value="activo">Activo</option>
+                          <option value="inactivo">Inactivo</option>
+                        </select>
+                        </div>
+
+                        <div class="col-md-6">
+                          <label>Correo</label>
+                          <input name="usu_correo" type="email" class="form-control" placeholder="ej. correo1@gmail.com">
+                        </div>
+
+                        </div>
+                        <br><div class="row">
+                        <div class="col-md-6">
+                          <label class="form-label" for="basic-default-fullname">Dirección</label>
+                          <input name="usu_direccion" type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe" />
+                        </div>
+
+                        <div class="col-md-6">
+                        <label class="form-label" for="basic-default-fullname">Foto</label>
+                          <input name="foto" type="file" class="form-control" id="basic-default-fullname" placeholder="John Doe" />
+                        </div>
+                        </div>
+
+
+                        <br><div class="row">
+                        <div class="col-md-6">
+                          <label>Rol</label>
+                          <select name="usu_rol" class="form-control">
+                            <option >Seleccione...</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Cliente</option>
+                            <option value="3">Editor</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label" for="basic-default-phone">Telefono</label>
+                          <input name="usu_telefono" type="text" id="basic-default-phone" class="form-control phone-mask" placeholder="658 799 8941"/>
+                        </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- / Content -->
+
+
+
+            <!-- Footer -->
+
+            <!-- / Footer -->
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+
+    <!-- Core JS -->
+    <!-- build:assets/vendor/js/core.js -->
+    <script src="assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="assets/vendor/libs/popper/popper.js"></script>
+    <script src="assets/vendor/js/bootstrap.js"></script>
+    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
